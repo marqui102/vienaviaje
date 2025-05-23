@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tabla de Monumentos en Viena - Ruta con Vienna Pass</title>
+<style>
+  /* Estilos generales */
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 30px;
+    background: #f5f7fa;
+    color: #333;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #2c3e50;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+
+  th, td {
+    padding: 15px 20px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    background-color: #34495e;
+    color: white;
+    font-weight: 600;
+  }
+
+  tr:hover {
+    background-color: #f0f8ff;
+  }
+
+  /* Colores por día para la columna Día */
+  .dia-martes {
+    background-color: #e74c3c;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .dia-miercoles {
+    background-color: #27ae60;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .dia-jueves {
+    background-color: #2980b9;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  /* Encabezado transporte */
+  .transporte {
+    font-style: italic;
+    color: #555;
+  }
+
+  /* Responsive para pantallas pequeñas */
+  @media (max-width: 700px) {
+    th, td {
+      padding: 10px 8px;
+      font-size: 14px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<h1>Ruta por Viena con Vienna Pass - Tabla de Monumentos y Transporte</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Día</th>
+      <th>Monumento / Lugar</th>
+      <th>Breve descripción</th>
+      <th>Cómo moverse al siguiente lugar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Día 1 - Martes -->
+    <tr>
+      <td class="dia-martes" rowspan="4">Martes</td>
+      <td>Palacio de Hofburg</td>
+      <td>Residencia imperial de los Habsburgo durante siglos.</td>
+      <td class="transporte">A pie: 8 minutos hacia la Catedral de San Esteban.</td>
+    </tr>
+    <tr>
+      <td>Catedral de San Esteban</td>
+      <td>Icono gótico de Viena con su torre y techo colorido.</td>
+      <td class="transporte">A pie: 5 minutos hacia la Casa de Mozart.</td>
+    </tr>
+    <tr>
+      <td>Casa de Mozart</td>
+      <td>Lugar donde Mozart vivió y compuso grandes obras.</td>
+      <td class="transporte">A pie: 3 minutos a la Calle Graben.</td>
+    </tr>
+    <tr>
+      <td>Calle Graben</td>
+      <td>Calle comercial histórica y elegante en el centro.</td>
+      <td class="transporte">Fin del recorrido a pie en el centro histórico.</td>
+    </tr>
+
+    <!-- Día 2 - Miércoles -->
+    <tr>
+      <td class="dia-miercoles" rowspan="4">Miércoles</td>
+      <td>Palacio de Schönbrunn</td>
+      <td>Residencia de verano imperial con jardines y laberinto.</td>
+      <td class="transporte">Metro U4: Desde Schönbrunn a Karlsplatz (15 min), luego a pie 10 min hasta Museo de Historia del Arte.</td>
+    </tr>
+    <tr>
+      <td>Museo de Historia del Arte</td>
+      <td>Gran colección de arte clásico y europeo.</td>
+      <td class="transporte">A pie: 10 minutos al Museo Albertina.</td>
+    </tr>
+    <tr>
+      <td>Museo Albertina</td>
+      <td>Museo de arte gráfico con obras de Klimt, Picasso y más.</td>
+      <td class="transporte">A pie: 5 minutos a la Ópera Estatal de Viena.</td>
+    </tr>
+    <tr>
+      <td>Ópera Estatal de Viena</td>
+      <td>Famoso teatro de ópera con visitas guiadas.</td>
+      <td class="transporte">Fin del recorrido en el centro histórico.</td>
+    </tr>
+
+    <!-- Día 3 - Jueves -->
+    <tr>
+      <td class="dia-jueves" rowspan="4">Jueves</td>
+      <td>Palacio Belvedere</td>
+      <td>Palacio barroco con arte modernista, incluido “El beso”.</td>
+      <td class="transporte">Tranvía D o línea 18: 10 min al Museo de Historia Natural (caminando luego 10 min).</td>
+    </tr>
+    <tr>
+      <td>Museo de Historia Natural</td>
+      <td>Museo con colecciones de ciencia y naturaleza.</td>
+      <td class="transporte">Metro U1: Stephansplatz a Praterstern (10 min) para Prater.</td>
+    </tr>
+    <tr>
+      <td>Prater y Noria Gigante</td>
+      <td>Parque de atracciones con vistas panorámicas de Viena.</td>
+      <td class="transporte">Bus 20A o taxi: 15 min a la Torre del Danubio.</td>
+    </tr>
+    <tr>
+      <td>Torre del Danubio</td>
+      <td>Torre de observación con restaurante giratorio.</td>
+      <td class="transporte">Fin del recorrido, se puede volver al centro en bus o taxi.</td>
+    </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

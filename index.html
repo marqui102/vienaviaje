@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Viaje a Viena - Portada</title>
+<style>
+  /* Fondo con imagen de Viena, centrado y cubriendo todo */
+  body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: 
+      linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+      url('https://www.panavision-tours.com/viajes/ciudad-de-viena/viena.jpg') no-repeat center center/cover;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 4rem;
+    font-weight: 900;
+    text-shadow: 3px 3px 10px rgba(0,0,0,0.8);
+    margin-bottom: 50px;
+    letter-spacing: 2px;
+  }
+
+  .btn-container {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  a.button {
+    background: linear-gradient(45deg, #ff512f, #dd2476);
+    padding: 18px 50px;
+    border-radius: 50px;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+    box-shadow: 0 8px 15px rgba(221,36,118,0.5);
+    transition: all 0.3s ease;
+    min-width: 220px;
+    display: inline-block;
+    text-align: center;
+  }
+
+  a.button:hover {
+    background: linear-gradient(45deg, #dd2476, #ff512f);
+    box-shadow: 0 12px 20px rgba(255,81,47,0.7);
+    transform: translateY(-4px);
+  }
+
+  @media (max-width: 600px) {
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 30px;
+    }
+    .btn-container {
+      gap: 20px;
+      flex-direction: column;
+    }
+    a.button {
+      font-size: 1.4rem;
+      padding: 15px 35px;
+      min-width: auto;
+      border-radius: 40px;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <h1>Viaje a Viena</h1>
+
+  <div class="btn-container">
+    <a href="mapaviena.html" class="button" role="button">Ver Mapa de la Ruta</a>
+    <a href="tablaviena.html" class="button" role="button">Ver Tabla de Monumentos</a>
+  </div>
+
+</body>
+</html>

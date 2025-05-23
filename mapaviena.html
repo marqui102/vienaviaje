@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ruta por Viena con Vienna Pass</title>
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet/dist/leaflet.css"
+/>
+<style>
+  #map { height: 90vh; width: 100%; }
+  .legend {
+    background: white;
+    padding: 10px;
+    line-height: 1.5em;
+  }
+  .legend-color {
+    display: inline-block;
+    width: 20px;
+    height: 10px;
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+
+<h2>Ruta por Viena con Vienna Pass: Martes, Miércoles y Jueves</h2>
+<div id="map"></div>
+<div class="legend">
+  <h4>Leyenda de días</h4>
+  <div><span class="legend-color" style="background: red;"></span>Martes - Centro Histórico</div>
+  <div><span class="legend-color" style="background: green;"></span>Miércoles - Palacios y Arte</div>
+  <div><span class="legend-color" style="background: blue;"></span>Jueves - Historia, Ciencia y Vistas</div>
+</div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+  // Inicializar mapa centrado en Viena
+  const map = L.map('map').setView([48.2082, 16.3738], 13);
+
+  // Añadir capa de mapas de OpenStreetMap
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution:
+      '© OpenStreetMap contributors',
+  }).addTo(map);
+
+  // Waypoints Día 1 - Martes (color rojo)
+  const martesCoords = [
+    { name: "Palacio Hofburg", coords: [48.2062, 16.3650] },
+    { name: "Catedral de San Esteban", coords: [48.2082, 16.3738] },
+    { name: "Casa de Mozart", coords: [48.2084, 16.3715] },
+    { name: "Graben", coords: [48.2086, 16.3712] }
+  ];
+
+  // Añadir marcadores y ruta día 1
+  const martesMarkers = [];
+  martesCoords.forEach((point) => {
+    martesMarkers.push(L.marker(point.coords).bindPopup(point.name).addTo(map));
+  });
+  const martesPolyline = L.polyline(martesCoords.map(p => p.coords), {
+    color: 'red',
+    weight: 4,
+    opacity: 0.7,
+  }).addTo(map);
+
+  // Waypoints Día 2 - Miércoles (color verde)
+  const miercolesCoords = [
+    { name: "Palacio Schönbrunn", coords: [48.1845, 16.3122] },
+    { name: "Museo de Historia del Arte", coords: [48.2030, 16.3619] },
+    { name: "Museo Albertina", coords: [48.2046, 16.3680] },
+    { name: "Ópera Estatal de Viena", coords: [48.2029, 16.3683] }
+  ];
+
+  // Marcadores y ruta día 2
+  const miercolesMarkers = [];
+  miercolesCoords.forEach((point) => {
+    miercolesMarkers.push(L.marker(point.coords, {icon: L.icon({iconUrl: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png'})}).bindPopup(point.name).addTo(map));
+  });
+  const miercolesPolyline = L.polyline(miercolesCoords.map(p => p.coords), {
+    color: 'green',
+    weight: 4,
+    opacity: 0.7,
+  }).addTo(map);
+
+  // Waypoints Día 3 - Jueves (color azul)
+  const juevesCoords = [
+    { name: "Palacio Belvedere", coords: [48.1915, 16.3800] },
+    { name: "Museo de Historia Natural", coords: [48.2047, 16.3607] },
+    { name: "Prater (Noria Gigante)", coords: [48.2164, 16.3980] },
+    { name: "Torre del Danubio", coords: [48.2263, 16.4244] }
+  ];
+
+  // Marcadores y ruta día 3
+  const juevesMarkers = [];
+  juevesCoords.forEach((point) => {
+    juevesMarkers.push(L.marker(point.coords, {icon: L.icon({iconUrl: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'})}).bindPopup(point.name).addTo(map));
+  });
+  const juevesPolyline = L.polyline(juevesCoords.map(p => p.coords), {
+    color: 'blue',
+    weight: 4,
+    opacity: 0.7,
+  }).addTo(map);
+
+  // Ajustar vista para mostrar todos los puntos
+  const allCoords = [...martesCoords, ...miercolesCoords, ...juevesCoords].map(p => p.coords);
+  const bounds = L.latLngBounds(allCoords);
+  map.fitBounds(bounds, {padding: [50, 50]});
+</script>
+
+</body>
+</html>
