@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mapa Itinerario Viena con alojamiento</title>
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+/>
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  #map {
+    height: 100vh;
+    width: 100%;
+  }
+  .legend {
+    background: white;
+    padding: 10px 15px;
+    line-height: 1.4;
+    box-shadow: 0 0 12px rgba(0,0,0,0.3);
+    border-radius: 8px;
+    font-size: 14px;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+    font-family: Arial, sans-serif;
+  }
+  .legend h3 {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    color: #34495e;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .color-box {
+    width: 20px;
+    height: 14px;
+    margin-right: 8px;
+    border-radius: 3px;
+  }
+  .color-martes { background: #e74c3c; }
+  .color-miercoles { background: #2980b9; }
+  .color-jueves { background: #27ae60; }
+  .color-alojamiento { background: #f1c40f; } /* amarillo */
+</style>
+</head>
+<body>
+
+<h1 style="text-align:center; font-family: 'Georgia', serif; color: #2c3e50; margin: 15px 0;">Mapa Itinerario Viaje a Viena</h1>
+<div id="map"></div>
+
+<div class="legend">
+  <h3>Días y colores</h3>
+  <div class="legend-item"><div class="color-box color-martes"></div>Martes</div>
+  <div class="legend-item"><div class="color-box color-miercoles"></div>Miércoles</div>
+  <div class="legend-item"><div class="color-box color-jueves"></div>Jueves</div>
+  <div class="legend-item"><div class="color-box color-alojamiento"></div>Alojamiento (inicio/fin)</div>
+</div>
+
+<script
+  src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+></script>
+<script>
+  const map = L.map('map').setView([48.2082, 16.3738], 13);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  // Punto alojamiento
+  const alojamiento = {name: 'Alojamiento Hernalser Hauptstraße 105, 1170 Wien', coords: [48.2230, 16.3163]};
+
+  // Función para añadir marcador alojamiento
+  L.circleMarker(alojamiento.coords, {
+    radius: 10,
+    fillColor: '#FFFF00',
+    color: '#FFFF00',
+    weight: 3,
+    opacity: 1,
+    fillOpacity: 0.9
+  }).addTo(map).bindPopup(`<b>${alojamiento.name}</b>`);
+
+  // Días con puntos
+  const martesPoints = [
+    {name: 'Palacio Hofburg + Burggarten', coords: [48.2062, 16.3656]},
+    {name: 'Catedral de San Esteban', coords: [48.2084, 16.3731]},
+    {name: 'Albertina', coords: [48.2046, 16.3684]},
+    {name: 'Cripta Imperial de los Capuchinos', coords: [48.2087, 16.3695]},
+    {name: 'Ópera de Viena', coords: [48.2025, 16.3687]},
+    {name: 'Prater', coords: [48.2162, 16.4029]}
+  ];
+
+  const miercolesPoints = [
+    {name: 'Palacio de Schönbrunn', coords: [48.1845, 16.3122]},
+    {name: 'Mercado Naschmarkt', coords: [48.1967, 16.3613]},
+    {name: 'Palacio Belvedere (Alto y Bajo)', coords: [48.1913, 16.3804]},
+    {name: 'Centro y calles importantes', coords: [48.2085, 16.3728]}
+  ];
+
+  const juevesPoints = [
+    {name: 'Museo Historia del Arte', coords: [48.2036, 16.3612]},
+    {name: 'MuseumsQuartier (Comida)', coords: [48.2030, 16.3605]},
+    {name: 'Museo Historia Natural', coords: [48.2042, 16.3599]},
+    {name: 'Estatua dorada Johann Strauss II (Stadtpark)', coords: [48.2048, 16.3770]},
+    {name: 'Volksgarten', coords: [48.2045, 16.3689]},
+    {name: 'Maria-Theresien-Platz', coords: [48.2037, 16.3608]}
+  ];
+
+  // Función para dibujar rutas (inicio-fin alojamiento)
+  function drawRoute(points, color) {
+    // Construir array con alojamiento + puntos + alojamiento para ruta circular
+    const routePoints = [alojamiento.coords, ...points.map(p => p.coords), alojamiento.coords];
+
+    // Añadir marcador para cada punto excepto alojamiento (que ya está)
+    points.forEach(p => {
+      L.circleMarker(p.coords, {
+        radius: 8,
+        fillColor: color,
+        color: '#fff',
+        weight: 2,
+        opacity: 1,
+        fillOpacity: 0.8
+      }).addTo(map).bindPopup(`<b>${p.name}</b>`);
+    });
+
+    // Dibujar línea
+    L.polyline(routePoints, {color: color, weight: 5, opacity: 0.7}).addTo(map);
+  }
+
+  drawRoute(martesPoints, '#e74c3c');      // rojo
+  drawRoute(miercolesPoints, '#2980b9');   // azul
+  drawRoute(juevesPoints, '#27ae60');      // verde
+
+  // Ajustar vista para mostrar todos los puntos incluyendo alojamiento
+  const allPoints = [
+    alojamiento,
+    ...martesPoints,
+    ...miercolesPoints,
+    ...juevesPoints
+  ];
+  const allLatLngs = allPoints.map(p => p.coords);
+  const bounds = L.latLngBounds(allLatLngs);
+  map.fitBounds(bounds.pad(0.2));
+</script>
+
+</body>
+</html>
